@@ -51,6 +51,31 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
 
+        .vote-section {
+            max-width: 600px;
+            margin: 20px auto 60px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .vote-section button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .vote-section button:hover {
+            background-color: #0056b3;
+        }
+
         footer {
             text-align: center;
             padding: 30px 20px;
@@ -72,9 +97,40 @@
     <img src="dog3.jpg" alt="Hund 3">
 </main>
 
+<div class="vote-section">
+    <h2>Welches Bild gefällt dir am besten?</h2>
+    <form id="voteForm">
+        <label><input type="radio" name="dog" value="Hund 1"> Hund 1</label><br>
+        <label><input type="radio" name="dog" value="Hund 2"> Hund 2</label><br>
+        <label><input type="radio" name="dog" value="Hund 3"> Hund 3</label><br>
+        <button type="button" onclick="submitVote()">Abstimmen</button>
+    </form>
+    <p id="voteResult" style="margin-top:15px; font-weight:bold;"></p>
+</div>
+
 <footer>
     © 2026 · Testprojekt
 </footer>
+
+<script>
+function submitVote() {
+    const choices = document.getElementsByName('dog');
+    let selected = null;
+    for (const choice of choices) {
+        if (choice.checked) {
+            selected = choice.value;
+            break;
+        }
+    }
+
+    const result = document.getElementById('voteResult');
+    if (selected) {
+        result.textContent = `Danke für deine Abstimmung! Du hast "${selected}" gewählt.`;
+    } else {
+        result.textContent = 'Bitte wähle zuerst ein Bild aus.';
+    }
+}
+</script>
 
 </body>
 </html>
